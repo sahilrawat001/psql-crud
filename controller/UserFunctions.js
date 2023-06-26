@@ -51,6 +51,7 @@ userController.updateTutorial = (request, response) => {
              bind.push(request.body[key]);
 
              count++;
+             
             // query2.concat(key+"=" +request.body[key] +"," );
             // console.log(key, request.body[key],query2,'=================');
          }
