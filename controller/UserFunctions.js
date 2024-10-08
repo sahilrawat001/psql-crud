@@ -13,7 +13,7 @@ const pool = new Pool({
     port: 5432,
 });
 const userController = {};
-
+console.log('hi')
 // finds the matching mail with data
 let userMail = (tokenid) => data.find((i) => i.mail == tokenid);
 
