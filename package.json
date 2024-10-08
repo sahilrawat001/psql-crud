@@ -3,15 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  // "scripts": {
-  //   "test": "echo \"Error: no test specified\"  "
-  // },
-  {
+  
     "scripts": {
       "test": "jest", // or your preferred test runner
       "build": "your build command" // Optional, if your project has a build step
-    }
-  }
+    },
   "author": "",
   "license": "ISC",
   "dependencies": {
