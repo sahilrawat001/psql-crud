@@ -1,39 +1,44 @@
-name: Windows CI Pipeline
+name: Node.js CI
 
-# Trigger the workflow when code is pushed to the main branch or a pull request is created
 on:
   push:
     branches:
-      - main
+      - master
   pull_request:
     branches:
-      - main
+      - master
 
 jobs:
   build:
-    # Use the Windows runner
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
-    # Steps define the series of actions to run the CI pipeline
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x]  # Test across different Node.js versions
+
     steps:
-      # Check out the repository code
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Set up Node.js (if using Node.js, replace with your environment setup if needed)
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: ${{ matrix.node-version }}
 
-      # Install dependencies (for Node.js, this would be npm install)
       - name: Install dependencies
         run: npm install
 
-      # Run tests (adjust based on your project's testing framework)
-      - name: Run tests
-        run: npm test
+      # Optionally run the build script if needed
+    #   - name: Build
+    #     run: npm run build
+    #     if: exists('package.json') && contains(github.event.head_commit.message, 'build')
 
-      # Optional: Build the project if necessary
-      - name: Build project
-        run: npm run build
+    #   - name: Run tests
+    #     run: npm test
+
+      - name: Upload test results (optional)
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results
+          path: test-results.xml
