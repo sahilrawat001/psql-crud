@@ -14,7 +14,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18]  # Test across different Node.js versions
+        node-version: [20]  # Test across different Node.js versions
 
     steps:
       - name: Checkout repository
