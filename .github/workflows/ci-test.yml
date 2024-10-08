@@ -1,0 +1,39 @@
+name: Windows CI Pipeline
+
+# Trigger the workflow when code is pushed to the main branch or a pull request is created
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    # Use the Windows runner
+    runs-on: windows-latest
+
+    # Steps define the series of actions to run the CI pipeline
+    steps:
+      # Check out the repository code
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Set up Node.js (if using Node.js, replace with your environment setup if needed)
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+
+      # Install dependencies (for Node.js, this would be npm install)
+      - name: Install dependencies
+        run: npm install
+
+      # Run tests (adjust based on your project's testing framework)
+      - name: Run tests
+        run: npm test
+
+      # Optional: Build the project if necessary
+      - name: Build project
+        run: npm run build
